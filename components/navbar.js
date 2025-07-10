@@ -11,6 +11,7 @@ export default function Navbar() {
       position="sticky"
       sx={{
         backgroundColor: "#f0f0f0",
+        zIndex: 99,
       }}
       top={0}
     >
