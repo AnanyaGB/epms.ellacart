@@ -1,5 +1,6 @@
 "use client";
 import { app } from "@/lib/firebase.config";
+import FallbackLoader from "@/public/loader-fallback.gif";
 import {
   Alert,
   AlertTitle,
@@ -17,6 +18,7 @@ import {
   Typography,
 } from "@mui/material";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -218,6 +220,32 @@ function AddProduct() {
               }
               fullWidth
             />
+          </Grid>
+          <Grid container spacing={2} size={12}>
+            {data.images &&
+              data.images
+                .replace(/ /g, "")
+                .split(";")
+                .map((image, index) => (
+                  <Grid
+                    size={4}
+                    position="relative"
+                    sx={{
+                      aspectRatio: "1/1",
+                    }}
+                    key={index}
+                  >
+                    <Image
+                      src={image ? image : FallbackLoader}
+                      fill
+                      style={{
+                        objectFit: "contain",
+                      }}
+                      alt={image.toString()}
+                      rel="preload"
+                    />
+                  </Grid>
+                ))}
           </Grid>
           <Grid size={12} mt={2}>
             <Stack direction="row" gap={2}>

@@ -1,4 +1,5 @@
 "use client";
+import FallbackLoader from "@/public/loader-fallback.gif";
 import { app } from "@/lib/firebase.config";
 import {
   Alert,
@@ -22,6 +23,7 @@ import {
   Typography,
 } from "@mui/material";
 import { setDoc, doc, getDoc, getFirestore } from "firebase/firestore";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
@@ -35,6 +37,7 @@ function EditProduct() {
     units: "",
     price: "",
     country: "",
+    images: "",
   });
 
   const params = useParams();
@@ -266,6 +269,32 @@ function EditProduct() {
                   }
                   fullWidth
                 />
+              </Grid>
+              <Grid container spacing={2} size={12}>
+                {data &&
+                  data.images
+                    .replace(/ /g, "")
+                    .split(";")
+                    .map((image, index) => (
+                      <Grid
+                        size={4}
+                        position="relative"
+                        sx={{
+                          aspectRatio: "1/1",
+                        }}
+                        key={index}
+                      >
+                        <Image
+                          src={image ? image : FallbackLoader}
+                          fill
+                          style={{
+                            objectFit: "contain",
+                          }}
+                          alt={image.toString()}
+                          rel="preload"
+                        />
+                      </Grid>
+                    ))}
               </Grid>
               <Grid size={12} mt={2}>
                 <Stack direction="row" gap={2}>
