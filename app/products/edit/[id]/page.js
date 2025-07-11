@@ -25,8 +25,8 @@ import {
 import { setDoc, doc, getDoc, getFirestore } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 function EditProduct() {
   const [data, setData] = useState({

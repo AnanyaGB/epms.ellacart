@@ -69,7 +69,7 @@ function Products() {
   return (
     <Container
       sx={{
-        pt: 12,
+        py: 12,
       }}
     >
       <Dialog open={showDialog} onClose={() => setShowDialog(false)}>
